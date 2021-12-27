@@ -12,6 +12,10 @@ public class Usuario {
 	
 	private String IP;
 	
+	public Usuario() {
+		
+	}
+	
 	public Usuario(String id, String nombre, String apellidos, String contraseña, String IP) {
 		this.setId(id);
 		this.setNombre(nombre);
@@ -65,7 +69,7 @@ public class Usuario {
 		if(this==u) {
 			return true;
 		}else {
-			if (this.id==u.id) {// en la base de datos, id es clave, por eso, 2 usuario seran iguales si sus id's son iguales
+			if (this.id.equals(u.id)) {// en la base de datos, id es clave, por eso, dos usuario seran iguales si sus id's son iguales
 				return true;
 			}else {
 				return false;
