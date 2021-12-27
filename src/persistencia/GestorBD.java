@@ -7,9 +7,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
-import model.*;
+import model.Fichero;
+import model.Usuario;
 
 public class GestorBD{
 	private static final String URL = getPropiedad("url");
@@ -38,9 +40,7 @@ public class GestorBD{
 	      con.setAutoCommit(false);
 	      String sql = "SELECT * FROM Usuario WHERE ID= '" + arg0 + "'";
 	      PreparedStatement stm = con.prepareStatement(sql);
-	      
-	        
-	   
+
 	      ResultSet res = stm.executeQuery(sql);
 	      
 	      if(res.next()) {
@@ -72,6 +72,48 @@ public class GestorBD{
 	      }
 	    }
 	    return deleted;
+	}
+	
+	public Fichero BuscaFichero(String arg0) {
+		
+		return null;
+		
+	}
+	
+	public boolean agnadirFichero(Fichero f) {
+		
+		return false;
+		
+	}
+	
+	public boolean agnadirPersona(Usuario u) {
+		
+		return false;
+		
+	}
+	
+	public boolean eliminarFichero(Fichero f) {
+		
+		return false;
+		
+	}
+	
+	public boolean eliminarPersona(Usuario u) {
+		
+		return false;
+		
+	}
+	
+	public List<Fichero> todosFicheros(){
+		
+		return null;
+		
+	}
+	
+	public List<Usuario> todosUsuarios(){// esto ns si deberia estar, pero bueno, yo lo pongo
+		
+		return null;
+		
 	}
 	
 }
