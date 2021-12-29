@@ -20,6 +20,7 @@ public class VentanaPrincipal {
 		Display d= new Display();
 		
 		Shell s = new Shell(d);
+		s.setBounds(100, 100, 700, 500);
 		s.setLayout(new FillLayout());
 		TabFolder t = new TabFolder(s,SWT.TOP);
 		t.setLayout(new FillLayout());
@@ -52,7 +53,7 @@ public class VentanaPrincipal {
 		s.setText("SubeArchivos");
 		
 		
-		s.pack();
+		
 		
 		s.open();
 		
