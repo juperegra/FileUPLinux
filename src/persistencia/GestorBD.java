@@ -46,7 +46,7 @@ public class GestorBD{
 	      
 	      if(res.next()) {
 	    	  
-	    	  u= new Usuario(res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5));
+	    	  u= new Usuario(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
 	    	  
 	      }
 
@@ -187,7 +187,7 @@ public class GestorBD{
 
 				con.setAutoCommit(false);
 
-				String sql = "INSERT INTO Usuario VALUES(?,?,?,?,?)";
+				String sql = "INSERT INTO Usuario VALUES(?,?,?,?)";
 
 				PreparedStatement ps = con.prepareStatement(sql);
 
@@ -198,8 +198,6 @@ public class GestorBD{
 				ps.setString(3, u.getApellidos());
 				
 				ps.setString(4, u.getContraseña());
-				
-				ps.setString(5, u.getIP());
 
 
 				ps.executeUpdate();

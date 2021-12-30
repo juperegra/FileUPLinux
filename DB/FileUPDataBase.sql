@@ -12,7 +12,6 @@ CREATE TABLE `Usuario`
 	,	`Nombre`		nvarchar(20)	NOT NULL
 	,	`Apellidos`   	nvarchar(50)    DEFAULT NULL
 	,	`Contraseña`	nvarchar(30)	NOT NULL
-	,	`IP`			nvarchar(15)	NOT NULL
 
 	,	PRIMARY KEY(`ID`)
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1;

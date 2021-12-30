@@ -20,7 +20,6 @@ public class prueba {
 //			System.out.println(u.getNombre());
 //			System.out.println(u.getApellidos());
 //			System.out.println(u.getContraseña());
-//			System.out.println(u.getIP());
 			
 			Fichero F = new Fichero("1","Tremendo.txt",u,u2,"c/home/Tremendo.txt","UTF-8");
 			Fichero F1 = new Fichero("2","Tremendo2.txt",u,u2,"c/home/Tremendo2.txt","UTF-8");

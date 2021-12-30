@@ -10,18 +10,17 @@ public class Usuario {
 	
 	private String contraseña;
 	
-	private String IP;
+	
 	
 	public Usuario() {
 		
 	}
 	
-	public Usuario(String id, String nombre, String apellidos, String contraseña, String IP) {
+	public Usuario(String id, String nombre, String apellidos, String contraseña) {
 		this.setId(id);
 		this.setNombre(nombre);
 		this.setApellidos(apellidos);
 		this.setContraseña(contraseña);
-		this.setIP(IP);
 	}
 
 	public String getId() {
@@ -56,13 +55,6 @@ public class Usuario {
 		this.contraseña = contraseña;
 	}
 
-	public String getIP() {
-		return IP;
-	}
-
-	public void setIP(String iP) {
-		IP = iP;
-	}
 	
 	public boolean equals(Usuario u) {
 		
