@@ -8,6 +8,7 @@ import java.net.Socket;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -18,13 +19,13 @@ import org.eclipse.swt.widgets.Text;
 
 public class VentanaInicioSesion {
 	
-	public static void main(String[] args) {
+	public static void start() {
 		Display d= new Display();
 		
 		Shell s = new Shell(d);
 		GridLayout gl= new GridLayout();
 		
-		s.setBounds(750, 400, 400, 200);
+		s.setBounds(750, 400, 500, 250);
 		
 		s.setFullScreen(false);
 		
@@ -46,11 +47,12 @@ public class VentanaInicioSesion {
 		Label l1 = new Label(s, SWT.LEFT);
 		l1.setText("Usuario:");
 		Text text = new Text(s,SWT.SINGLE |SWT.BORDER);
-		
-		
-		
-		
+
 		GridData gd1= new GridData();
+		
+		GridData gdB= new GridData();
+		gdB.horizontalSpan=3;
+		gdB.horizontalAlignment = GridData.FILL;
 		
 		gd1.horizontalSpan=2;
 		gd1.horizontalAlignment = GridData.FILL;
@@ -64,25 +66,33 @@ public class VentanaInicioSesion {
 		
 		Button bis = new Button(s, SWT.CENTER);
 		bis.setText("Iniciar Sesion");
-		bis.setLayoutData(gd);
+		bis.setLayoutData(gdB);
 		
 		Label lre= new Label(s,SWT.CENTER);
 		lre.setText("¿No tienes cuenta?");
-		//lre.setLayoutData(gd);
+		lre.setLayoutData(gd);
+		
+		
 		
 		Button b = new Button(s, SWT.CENTER);
 		b.setText("Registrate");
-		b.setLayoutData(gd1);
+		b.setLayoutData(gdB);
+		
+		Label lerro= new Label(s,SWT.CENTER);
+		lerro.setText("");
+		lerro.setLayoutData(gd);
+		
+		
 		
 		bis.addSelectionListener(new SelectionAdapter(){
 			public void widgetSelected(SelectionEvent e){
-					inicioSesion(text.getText(), text1.getText(), d);
+					inicioSesion(text.getText(), text1.getText(), s, d, lerro);
 				}
 			});
 		
 		b.addSelectionListener(new SelectionAdapter(){
 			public void widgetSelected(SelectionEvent e){
-					registrarse();
+					registrarse(d);
 				}
 			});
 		
@@ -97,42 +107,49 @@ public class VentanaInicioSesion {
 		}
 		d.dispose();
 	}
-	public static void inicioSesion(String usuario, String contraseña, Display di) {
+	public static void inicioSesion(String usuario, String contraseña, Shell sh, Display de, Label lerr) {
 		String respuesta="";
 		try{
 			Socket s = new Socket("Localhost", 40400);
 			DataOutputStream d = new DataOutputStream(s.getOutputStream());
 			DataInputStream in= new DataInputStream(s.getInputStream());
 			
-			String ins="INSE ";
-			ins+=usuario+" "+contraseña;
+			String ins="GET ";
+			ins+=usuario+" "+contraseña+"\n";
 			System.out.println(ins);
 			d.write(ins.getBytes());// enviar el usuario y la contraseña al servidor para validar los datos
 			System.out.println("ej1");
-			while(in.readLine()!=null) {
-				respuesta+=in.readLine();
-			}
-			
-			//String respuesta ="OK";
-			System.out.println("ej2");
-			if(respuesta.equals(" OK")) {
-				di.sleep();
-				di.dispose();
-				VentanaPrincipal.start();
-			}else if(respuesta.startsWith(" ERROR: ")){
+			respuesta=in.readLine();
+			System.out.println(respuesta);
+			if(respuesta.startsWith("OK ")) {
+				de.dispose();
+				VentanaPrincipal.inicio();
+				System.out.println("esto");
+			}else if(respuesta.startsWith("ERROR: ")){
 				String[] trozos=respuesta.split(":");
-				System.out.println(trozos[1]);
+				
+				lerr.setText(trozos[1]);
+				final Color color = new Color(de, 255, 0, 0);
+				lerr.setForeground(color);
+				
+				while(!sh.isDisposed()) {
+					if(de.readAndDispatch()) {
+						de.sleep();
+					}
+				}
 			}
 			
 			
-			
+			s.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}
 	
-	public static void registrarse(){
-		// llamada al formulario de registro
+	public static void registrarse(Display d){
+		d.dispose();
+		VentanaRegistrar.startReg();
+		VentanaInicioSesion.start();
 	}
 	
 }

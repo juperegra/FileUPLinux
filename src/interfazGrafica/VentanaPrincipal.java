@@ -9,13 +9,18 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
+import model.Usuario;
+
 ;
 
 public class VentanaPrincipal {
-
-	public static void start() {
-		// TODO Auto-generated method stub
-		
+	
+	
+	public static void iniciarCliente() {
+		VentanaInicioSesion.start();
+		inicio();
+	}
+	public static void inicio() {
 		Display d= new Display();
 		
 		Shell s = new Shell(d);
@@ -50,10 +55,6 @@ public class VentanaPrincipal {
 		
 		t.pack();
 		s.setText("SubeArchivos");
-		
-		
-		
-		
 		s.open();
 		
 		while(!s.isDisposed()) {
@@ -63,5 +64,4 @@ public class VentanaPrincipal {
 		}
 		d.dispose();
 	}
-
 }
