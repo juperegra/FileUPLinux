@@ -1,6 +1,7 @@
 package interfazGrafica;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
@@ -15,15 +16,18 @@ import model.Usuario;
 
 public class VentanaPrincipal {
 	
+	private Usuario u;
 	
-	public static void iniciarCliente() {
-		VentanaInicioSesion.start();
-		inicio();
+	public VentanaPrincipal() {
+		VentanaInicioSesion vis= new VentanaInicioSesion();
+		this.u=vis.start();
 	}
-	public static void inicio() {
+	
+	public void inicio() {
 		Display d= new Display();
 		
 		Shell s = new Shell(d);
+		
 		s.setBounds(100, 100, 700, 500);
 		s.setLayout(new FillLayout());
 		TabFolder t = new TabFolder(s,SWT.TOP);

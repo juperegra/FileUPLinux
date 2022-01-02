@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Text;
 
 public class VentanaRegistrar {
 	
-	public static void startReg() {
+	public void startReg() {
 		Display d= new Display();
 		
 		Shell s = new Shell(d);
@@ -96,7 +96,7 @@ public class VentanaRegistrar {
 		}
 		d.dispose();
 	}
-	public static void registro(String nombre, String apellidos, String usuario, String contraseña, Label lerr, Display de, Shell sh) {
+	public void registro(String nombre, String apellidos, String usuario, String contraseña, Label lerr, Display de, Shell sh) {
 		try {
 			Socket s= new Socket("localhost", 40400);
 			DataOutputStream out= new DataOutputStream(s.getOutputStream());

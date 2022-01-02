@@ -38,7 +38,7 @@ public class AtenderPeticion extends Thread{
 	}
 	
 	public void leerPeticion(String pet, DataOutputStream out) {
-		if(pet.startsWith("GET ")) {
+		if(pet.startsWith("POST ")) {
 			String resp=""+"\n";
 			try {
 	 			String[] trozos=pet.split(" ");
@@ -92,6 +92,20 @@ public class AtenderPeticion extends Thread{
 				System.out.println(resp);
 				out.write(resp.getBytes());
 				System.out.println("justo despues deenviar");
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}if(pet.startsWith("GET: ")) {
+			String resp=""+"\n";
+			try {
+	 			String[] trozos=pet.split(" ");
+				
+				
+	 			
+				out.write(resp.getBytes());
+				
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

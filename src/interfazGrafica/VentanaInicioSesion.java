@@ -17,9 +17,13 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import model.Usuario;
+
 public class VentanaInicioSesion {
 	
-	public static void start() {
+	private Usuario ussr;
+	
+	public Usuario start() {
 		Display d= new Display();
 		
 		Shell s = new Shell(d);
@@ -105,25 +109,26 @@ public class VentanaInicioSesion {
 				d.sleep();
 			}
 		}
-		d.dispose();
+		//d.dispose();
+		return this.ussr;
 	}
-	public static void inicioSesion(String usuario, String contraseña, Shell sh, Display de, Label lerr) {
+	public void inicioSesion(String usuario, String contraseña, Shell sh, Display de, Label lerr) {
 		String respuesta="";
 		try{
 			Socket s = new Socket("Localhost", 40400);
-			DataOutputStream d = new DataOutputStream(s.getOutputStream());
+			DataOutputStream out = new DataOutputStream(s.getOutputStream());
 			DataInputStream in= new DataInputStream(s.getInputStream());
 			
-			String ins="GET ";
+			String ins="POST ";
 			ins+=usuario+" "+contraseña+"\n";
 			System.out.println(ins);
-			d.write(ins.getBytes());// enviar el usuario y la contraseña al servidor para validar los datos
+			out.write(ins.getBytes());// enviar el usuario y la contraseña al servidor para validar los datos
 			System.out.println("ej1");
 			respuesta=in.readLine();
 			System.out.println(respuesta);
 			if(respuesta.startsWith("OK ")) {
+				this.ussr=getUsuario(usuario,s,in,out);
 				de.dispose();
-				VentanaPrincipal.inicio();
 				System.out.println("esto");
 			}else if(respuesta.startsWith("ERROR: ")){
 				String[] trozos=respuesta.split(":");
@@ -146,10 +151,27 @@ public class VentanaInicioSesion {
 		}
 	}
 	
-	public static void registrarse(Display d){
+	public void registrarse(Display d){
 		d.dispose();
-		VentanaRegistrar.startReg();
-		VentanaInicioSesion.start();
+		VentanaRegistrar vr= new VentanaRegistrar();
+		vr.startReg();
+		this.start();
+	}
+	
+	private Usuario getUsuario(String id, Socket s, DataInputStream in, DataOutputStream out) throws IOException {
+		String peti="GET: ";
+		peti+="Usuario "+ id+"\n";
+		out.write(peti.getBytes());
+		
+		String respuesta=in.readLine();
+		
+		String [] trozos= respuesta.split(" ");
+		
+		String apellidos=null;
+		if(trozos.length==4) {
+			apellidos=trozos[3];
+		}
+		return new Usuario(trozos[0],trozos[2],apellidos,trozos[1]);
 	}
 	
 }
