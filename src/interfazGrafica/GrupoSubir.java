@@ -6,9 +6,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
-public class GrupoA extends Composite{
+public class GrupoSubir extends Composite{
 
-	public GrupoA(Composite c, int style) {
+	public GrupoSubir(Composite c, int style) {
 		super(c,style);
 		Group g= new Group(this, SWT.FILL);
 		

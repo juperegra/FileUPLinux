@@ -320,7 +320,7 @@ public class GestorBD{
 		
 	}
 	
-	public List<Fichero> todosFicheros() throws Exception{
+	public List<Fichero> todosFicherosUsuario(String arg0) throws Exception{
 		
 		List<Fichero> lf=new ArrayList<>();
 		Connection con = null;
@@ -330,7 +330,7 @@ public class GestorBD{
 
 			con.setAutoCommit(false);
 
-			String sql = "SELECT * FROM Fichero";
+			String sql = "SELECT * FROM Fichero WHERE ID_Receptor= '" + arg0 + "'";
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			

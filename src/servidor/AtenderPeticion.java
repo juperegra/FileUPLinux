@@ -1,12 +1,9 @@
 package servidor;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+
 import java.net.Socket;
 
 import model.Usuario;
@@ -102,7 +99,13 @@ public class AtenderPeticion extends Thread{
 			try {
 	 			String[] trozos=pet.split(" ");
 				
-				
+				if(trozos[1].equals("Usuario")) {
+					Usuario us= gb.buscarUsuario(trozos[2]);
+					resp=us.getId()+" "+us.getContraseña()+" "+us.getNombre()+" "+us.getApellidos()+"\n";
+				}
+				if(trozos[1].equals("Fichero")) {
+					
+				}
 	 			
 				out.write(resp.getBytes());
 				

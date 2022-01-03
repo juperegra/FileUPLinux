@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.TabItem;
 
 import model.Usuario;
 
-;
+
 
 public class VentanaPrincipal {
 	
@@ -35,17 +35,18 @@ public class VentanaPrincipal {
 		
 		TabItem t1=new TabItem(t,SWT.FILL);
 		t1.setText("Subir archivo");
-		t1.setControl(new GrupoA(t,SWT.NONE));
+		t1.setControl(new GrupoSubir(t,SWT.NONE));
 		
-		TabItem t2=new TabItem(t,SWT.NONE);
+		TabItem t2=new TabItem(t,SWT.FILL);
 		t2.setText("Mis archivos");
 		//t2.setControl(new GrupoDeGrupos(t,SWT.NONE));
 		t.setLayout(new FillLayout());
-		TabItem t3=new TabItem(t,SWT.NONE);
+		
+		TabItem t3=new TabItem(t,SWT.FILL);
 		t3.setText("Archivos publicos");
 		//t3.setControl(new GrupoConEventos(t,SWT.NONE));
 		
-		TabItem t4=new TabItem(t,SWT.NONE);
+		TabItem t4=new TabItem(t,SWT.FILL);
 		Device de = Display.getCurrent ();
 		Image ima= new Image(de,"Images/campana.jpg");
 		t4.setImage(ima);
