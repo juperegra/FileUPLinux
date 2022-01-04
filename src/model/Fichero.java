@@ -86,4 +86,10 @@ public class Fichero {
 		}
 	}
 	
+	public String toString() {
+		
+		return this.id+" "+this.nombre+" "+this.emisor.getId()+" "+this.receptor.getId()+" "+this.ruta+" "+this.codificacion+" ";
+		
+	}
+	
 }

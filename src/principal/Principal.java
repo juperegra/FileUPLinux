@@ -1,16 +1,17 @@
 package principal;
 
 import org.eclipse.swt.SWTError;
+import org.eclipse.swt.SWTException;
 
-import interfazGrafica.VentanaPrincipal;
+import interfazGrafica.VentanaInicioSesion;
 
 public class Principal {
 
 	public static void main(String[] args) {
 			try {
-				VentanaPrincipal vp= new VentanaPrincipal();
-				vp.inicio();
-			}catch(SWTError e) {
+				VentanaInicioSesion vis= new VentanaInicioSesion();
+				vis.start();
+			}catch(SWTError | SWTException e) {
 				
 			}
 			

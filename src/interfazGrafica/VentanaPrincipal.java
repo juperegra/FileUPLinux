@@ -2,6 +2,8 @@ package interfazGrafica;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
@@ -19,8 +21,11 @@ public class VentanaPrincipal {
 	private Usuario u;
 	
 	public VentanaPrincipal() {
-		VentanaInicioSesion vis= new VentanaInicioSesion();
-		this.u=vis.start();
+		
+	}
+	
+	public VentanaPrincipal(Usuario u) {
+		this.u=u;
 	}
 	
 	public void inicio() {
@@ -39,8 +44,16 @@ public class VentanaPrincipal {
 		
 		TabItem t2=new TabItem(t,SWT.FILL);
 		t2.setText("Mis archivos");
-		//t2.setControl(new GrupoDeGrupos(t,SWT.NONE));
+		t2.setControl(new GrupoArchivos(t,SWT.NONE));
 		t.setLayout(new FillLayout());
+		VentanaPrincipal pri= this;
+		t.addSelectionListener(new SelectionAdapter() {
+		      public void widgetSelected(SelectionEvent event) {
+		        if(t.getSelection()[0].getText().equals("Mis archivos")) {
+		        	GrupoArchivos.eyey(pri);
+		        }
+		      }
+		    });
 		
 		TabItem t3=new TabItem(t,SWT.FILL);
 		t3.setText("Archivos publicos");
@@ -68,5 +81,9 @@ public class VentanaPrincipal {
 			}
 		}
 		d.dispose();
+	}
+	
+	public Usuario getUsuario() {
+		return this.u;
 	}
 }

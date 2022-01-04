@@ -329,7 +329,9 @@ public class GestorBD{
 			con = DriverManager.getConnection(URL, USR, PWD);
 
 			con.setAutoCommit(false);
-
+			
+			System.out.println(arg0);
+			
 			String sql = "SELECT * FROM Fichero WHERE ID_Receptor= '" + arg0 + "'";
 
 			PreparedStatement ps = con.prepareStatement(sql);

@@ -3,9 +3,10 @@ package servidor;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-
 import java.net.Socket;
+import java.util.List;
 
+import model.Fichero;
 import model.Usuario;
 import persistencia.GestorBD;
 
@@ -22,13 +23,15 @@ public class AtenderPeticion extends Thread{
 		try {
 			DataInputStream in = new DataInputStream(s.getInputStream());
 			DataOutputStream out= new DataOutputStream(s.getOutputStream());
-         
+			
+			System.out.println("mas ejecuciones");
+			
 			String pet= in.readLine();
 			System.out.println(pet);
-
-			leerPeticion(pet, out);
-			
-			
+			if(pet!=null) {
+				leerPeticion(pet, out);
+			}
+		
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -98,18 +101,37 @@ public class AtenderPeticion extends Thread{
 			String resp=""+"\n";
 			try {
 	 			String[] trozos=pet.split(" ");
-				
+				System.out.println(trozos[1]);
+				System.out.println("ey");
 				if(trozos[1].equals("Usuario")) {
+					System.out.println(trozos[2]);
 					Usuario us= gb.buscarUsuario(trozos[2]);
 					resp=us.getId()+" "+us.getContraseña()+" "+us.getNombre()+" "+us.getApellidos()+"\n";
 				}
-				if(trozos[1].equals("Fichero")) {
+				/*if(trozos[1].equals("Fichero")) {
 					
-				}
+				}*/
 	 			
 				out.write(resp.getBytes());
 				
 				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}if(pet.startsWith("GET ALL: Ficheros ")) {
+			String resp=""+"\n";
+			try {
+	 			String[] trozos=pet.split(" ");
+	 			System.out.println(trozos[3]);
+	 			List<Fichero> lis = gb.todosFicherosUsuario(trozos[3]);
+	 			
+	 			for(Fichero f: lis) {
+	 				System.out.println(f.toString());
+	 				resp=f.toString()+"\n";
+	 				out.write(resp.getBytes());
+	 			}
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

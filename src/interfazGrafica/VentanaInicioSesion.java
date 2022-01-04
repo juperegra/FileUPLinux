@@ -21,9 +21,7 @@ import model.Usuario;
 
 public class VentanaInicioSesion {
 	
-	private Usuario ussr;
-	
-	public Usuario start() {
+	public void start() {
 		Display d= new Display();
 		
 		Shell s = new Shell(d);
@@ -109,16 +107,14 @@ public class VentanaInicioSesion {
 				d.sleep();
 			}
 		}
-		//d.dispose();
-		return this.ussr;
+		d.dispose();
 	}
 	public void inicioSesion(String usuario, String contraseña, Shell sh, Display de, Label lerr) {
 		String respuesta="";
-		try{
-			Socket s = new Socket("Localhost", 40400);
+		try(Socket s = new Socket("Localhost", 40400);
 			DataOutputStream out = new DataOutputStream(s.getOutputStream());
-			DataInputStream in= new DataInputStream(s.getInputStream());
-			
+			DataInputStream in= new DataInputStream(s.getInputStream());){
+
 			String ins="POST ";
 			ins+=usuario+" "+contraseña+"\n";
 			System.out.println(ins);
@@ -127,9 +123,13 @@ public class VentanaInicioSesion {
 			respuesta=in.readLine();
 			System.out.println(respuesta);
 			if(respuesta.startsWith("OK ")) {
-				this.ussr=getUsuario(usuario,s,in,out);
 				de.dispose();
+				System.out.println(usuario);
 				System.out.println("esto");
+				s.close();
+				VentanaPrincipal ve= new VentanaPrincipal(getUsuario(usuario));
+				ve.inicio();
+				
 			}else if(respuesta.startsWith("ERROR: ")){
 				String[] trozos=respuesta.split(":");
 				
@@ -144,8 +144,6 @@ public class VentanaInicioSesion {
 				}
 			}
 			
-			
-			s.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -158,20 +156,37 @@ public class VentanaInicioSesion {
 		this.start();
 	}
 	
-	private Usuario getUsuario(String id, Socket s, DataInputStream in, DataOutputStream out) throws IOException {
-		String peti="GET: ";
-		peti+="Usuario "+ id+"\n";
-		out.write(peti.getBytes());
-		
-		String respuesta=in.readLine();
-		
-		String [] trozos= respuesta.split(" ");
-		
+	private Usuario getUsuario(String id) {
 		String apellidos=null;
-		if(trozos.length==4) {
-			apellidos=trozos[3];
+		String nombre=null;
+		String contrasegna=null;
+		try (Socket s = new Socket("Localhost", 40400);
+			DataOutputStream out = new DataOutputStream(s.getOutputStream());
+			DataInputStream in= new DataInputStream(s.getInputStream());){
+			
+			String peti="GET: ";
+			peti+="Usuario "+ id+"\n";
+			
+			System.out.println(peti);
+			
+			out.write(peti.getBytes());
+			
+			String respuesta=in.readLine();
+			
+			String [] trozos= respuesta.split(" ");
+			
+			nombre=trozos[2];
+			contrasegna=trozos[1];
+			
+			if(trozos.length==4) {
+				apellidos=trozos[3];
+			}
+			
+		}catch(IOException e){
+			e.printStackTrace();
 		}
-		return new Usuario(trozos[0],trozos[2],apellidos,trozos[1]);
+		
+		return new Usuario(id,nombre,apellidos,contrasegna);
 	}
 	
 }
