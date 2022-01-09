@@ -63,6 +63,7 @@ public class VentanaInicioSesion {
 		
 		Label l2 = new Label(s, SWT.LEFT);
 		l2.setText("Contraseña:");
+		
 		Text text1 = new Text(s,SWT.SINGLE |SWT.BORDER);
 		text1.setLayoutData(gd1);
 		
@@ -88,7 +89,11 @@ public class VentanaInicioSesion {
 		
 		bis.addSelectionListener(new SelectionAdapter(){
 			public void widgetSelected(SelectionEvent e){
+				if(!text.getText().equals("") && !text1.getText().equals("")){
+					//System.out.println("entra");
 					inicioSesion(text.getText(), text1.getText(), s, d, lerro);
+				}
+					
 				}
 			});
 		
@@ -97,7 +102,6 @@ public class VentanaInicioSesion {
 					registrarse(d);
 				}
 			});
-		
 		s.setDefaultButton(bis);
 		
 		s.open();
@@ -119,13 +123,13 @@ public class VentanaInicioSesion {
 			ins+=usuario+" "+contraseña+"\n";
 			System.out.println(ins);
 			out.write(ins.getBytes());// enviar el usuario y la contraseña al servidor para validar los datos
-			System.out.println("ej1");
+			//System.out.println("ej1");
 			respuesta=in.readLine();
 			System.out.println(respuesta);
 			if(respuesta.startsWith("OK ")) {
 				de.dispose();
 				System.out.println(usuario);
-				System.out.println("esto");
+				//System.out.println("esto");
 				s.close();
 				VentanaPrincipal ve= new VentanaPrincipal(getUsuario(usuario));
 				ve.inicio();
@@ -145,7 +149,7 @@ public class VentanaInicioSesion {
 			}
 			
 		}catch(IOException e){
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
@@ -183,7 +187,7 @@ public class VentanaInicioSesion {
 			}
 			
 		}catch(IOException e){
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		return new Usuario(id,nombre,apellidos,contrasegna);

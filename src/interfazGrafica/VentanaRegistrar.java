@@ -82,8 +82,11 @@ public class VentanaRegistrar {
 		lerr.setLayoutData(gd);
 		
 		bis.addSelectionListener(new SelectionAdapter(){
-			public void widgetSelected(SelectionEvent e){
-					registro(text1.getText(), text2.getText(),text3.getText(),text4.getText(),lerr, d, s);
+			public void widgetSelected(SelectionEvent e){	
+					if(!text1.getText().equals("") && !text3.getText().equals("")&& !text4.getText().equals("")){
+						//System.out.println("entra");
+						registro(text1.getText(), text2.getText(),text3.getText(),text4.getText(),lerr, d, s);
+					}
 				}
 			});
 		
@@ -102,7 +105,7 @@ public class VentanaRegistrar {
 			DataOutputStream out= new DataOutputStream(s.getOutputStream());
 			DataInputStream in= new DataInputStream(s.getInputStream());
 			
-			String pet="INSERT: ";
+			String pet="INSERT: Usuario ";
 			pet+= usuario+" "+contraseña+" "+nombre+" "+apellidos+"\n";
 			
 			out.write(pet.getBytes());
@@ -111,7 +114,7 @@ public class VentanaRegistrar {
 			
 			if(respuesta.startsWith("OK ")) {
 				sh.close();
-				System.out.println("esto");
+				//System.out.println("esto");
 			}else if(respuesta.startsWith("ERROR: ")){
 				String[] trozos=respuesta.split(":");
 				lerr.setText(trozos[1]);
@@ -120,8 +123,11 @@ public class VentanaRegistrar {
 			}
 			
 			System.out.println(pet);
+			s.close();
+			in.close();
+			out.close();
 		}catch(IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 }

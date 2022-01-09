@@ -1,6 +1,13 @@
 package model;
 
-public class Fichero {
+import java.io.Serializable;
+
+public class Fichero implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String id;
 	
@@ -14,7 +21,7 @@ public class Fichero {
 	
 	private String codificacion;
 	
-	public static int numficheros;// al introducir un nuevo fichero a la bd, se le asigna este numero como id y se incrementa en 1
+	public static int numficheros=0;// al introducir un nuevo fichero a la bd, se le asigna este numero como id y se incrementa en 1
 	//al iniciarse el servidor, se busca en la bd de alguna mandera la forma de asignar los id(que ya se me ocurrira)
 	
 	public Fichero(String id, String nombre, Usuario emisor, Usuario receptor, String ruta, String codificacion) {
