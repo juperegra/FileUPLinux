@@ -107,7 +107,7 @@ public class AtenderPeticion extends Thread{
 					ObjectInputStream oin= new ObjectInputStream(s1.getInputStream());
 					Fichero f= (Fichero)oin.readObject();
 					f.setId(String.valueOf((Fichero.numficheros+1)));
-					String ruta="/home/juan/Escritorio/Ficheros_FileUP/"+f.getNombre();
+					String ruta=f.getNombre();
 					f.setRuta(ruta);//ver donde guardo esta mierda
 					gb.agnadirFichero(f);
 					

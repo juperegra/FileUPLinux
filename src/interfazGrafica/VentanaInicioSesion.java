@@ -64,7 +64,7 @@ public class VentanaInicioSesion {
 		Label l2 = new Label(s, SWT.LEFT);
 		l2.setText("Contraseña:");
 		
-		Text text1 = new Text(s,SWT.SINGLE |SWT.BORDER);
+		Text text1 = new Text(s,SWT.SINGLE |SWT.BORDER | SWT.PASSWORD);
 		text1.setLayoutData(gd1);
 		
 		Button bis = new Button(s, SWT.CENTER);

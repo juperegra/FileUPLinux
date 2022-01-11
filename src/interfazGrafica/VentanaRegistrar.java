@@ -66,7 +66,7 @@ public class VentanaRegistrar {
 		
 		Label l4 = new Label(s, SWT.LEFT);
 		l4.setText("Contraseña:");
-		Text text4 = new Text(s,SWT.SINGLE |SWT.BORDER);
+		Text text4 = new Text(s,SWT.SINGLE |SWT.BORDER |SWT.PASSWORD);
 		text4.setLayoutData(gd1);
 		
 		GridData gdB= new GridData();

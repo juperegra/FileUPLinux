@@ -4,6 +4,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +138,7 @@ public class VentanaPrincipal {
 		try(Socket s= new Socket("localhost",40400);
 			DataOutputStream out= new DataOutputStream(s.getOutputStream());
 			DataInputStream in= new DataInputStream(s.getInputStream());){
+			
 			//System.out.println("esto ejecuta1");
 			String pet="GET: Fichero ";
 			
@@ -141,8 +146,10 @@ public class VentanaPrincipal {
 			//System.out.println("esto ejecuta2");
 			out.write(pet.getBytes());
 			
+			
 			FileDialog dlg = new FileDialog(sh, SWT.SAVE);
 			//System.out.println("esto ejecuta3");
+			dlg.setFileName(f.getNombre());
 		    String ruta = dlg.open();
 		    if (ruta != null) {
 		    	//System.out.println("aqui entra");

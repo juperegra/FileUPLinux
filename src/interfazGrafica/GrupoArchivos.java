@@ -2,6 +2,7 @@ package interfazGrafica;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -90,7 +91,7 @@ public class GrupoArchivos extends Composite{
 				
 				Fichero fich= (Fichero) oin.readObject();
 				//System.out.println("002");
-				while(fich!=null) {
+				while(fich!=null) {//al ejecutar esto va a saltar una EOFException, pero no pasa nada, la ejecucion sigue con normalidad y solo marca que no hay mas ficheros para leer
 					fichs.add(fich);
 					System.out.println(fich.toString());
 					fich= (Fichero) oin.readObject();
