@@ -65,7 +65,7 @@ public class VentanaRegistrar {
 		text3.setLayoutData(gd1);
 		
 		Label l4 = new Label(s, SWT.LEFT);
-		l4.setText("Contraseña:");
+		l4.setText("Contrasegna:");
 		Text text4 = new Text(s,SWT.SINGLE |SWT.BORDER |SWT.PASSWORD);
 		text4.setLayoutData(gd1);
 		
@@ -99,14 +99,14 @@ public class VentanaRegistrar {
 		}
 		d.dispose();
 	}
-	public void registro(String nombre, String apellidos, String usuario, String contraseña, Label lerr, Display de, Shell sh) {
+	public void registro(String nombre, String apellidos, String usuario, String contrasegna, Label lerr, Display de, Shell sh) {
 		try {
 			Socket s= new Socket("localhost", 40400);
 			DataOutputStream out= new DataOutputStream(s.getOutputStream());
 			DataInputStream in= new DataInputStream(s.getInputStream());
 			
 			String pet="INSERT: Usuario ";
-			pet+= usuario+" "+contraseña+" "+nombre+" "+apellidos+"\n";
+			pet+= usuario+" "+contrasegna+" "+nombre+" "+apellidos+"\n";
 			
 			out.write(pet.getBytes());
 			

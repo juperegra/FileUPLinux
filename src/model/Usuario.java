@@ -15,7 +15,7 @@ public class Usuario implements Serializable{
 	
 	private String apellidos;
 	
-	private String contraseña;
+	private String contrasegna;
 	
 	
 	
@@ -23,11 +23,11 @@ public class Usuario implements Serializable{
 		
 	}
 	
-	public Usuario(String id, String nombre, String apellidos, String contraseña) {
+	public Usuario(String id, String nombre, String apellidos, String contrasegna) {
 		this.setId(id);
 		this.setNombre(nombre);
 		this.setApellidos(apellidos);
-		this.setContraseña(contraseña);
+		this.setContrasegna(contrasegna);
 	}
 
 	public String getId() {
@@ -54,12 +54,12 @@ public class Usuario implements Serializable{
 		this.apellidos = apellidos;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasegna() {
+		return contrasegna;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasegna(String contrasegna) {
+		this.contrasegna = contrasegna;
 	}
 
 	

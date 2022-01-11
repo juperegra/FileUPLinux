@@ -197,7 +197,7 @@ public class GestorBD{
 				
 				ps.setString(3, u.getApellidos());
 				
-				ps.setString(4, u.getContraseña());
+				ps.setString(4, u.getContrasegna());
 
 
 				ps.executeUpdate();

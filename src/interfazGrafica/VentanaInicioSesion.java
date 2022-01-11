@@ -62,7 +62,7 @@ public class VentanaInicioSesion {
 		text.setLayoutData(gd1);
 		
 		Label l2 = new Label(s, SWT.LEFT);
-		l2.setText("Contraseña:");
+		l2.setText("Contrasegna:");
 		
 		Text text1 = new Text(s,SWT.SINGLE |SWT.BORDER | SWT.PASSWORD);
 		text1.setLayoutData(gd1);
@@ -113,14 +113,14 @@ public class VentanaInicioSesion {
 		}
 		d.dispose();
 	}
-	public void inicioSesion(String usuario, String contraseña, Shell sh, Display de, Label lerr) {
+	public void inicioSesion(String usuario, String contrasegna, Shell sh, Display de, Label lerr) {
 		String respuesta="";
 		try(Socket s = new Socket("Localhost", 40400);
 			DataOutputStream out = new DataOutputStream(s.getOutputStream());
 			DataInputStream in= new DataInputStream(s.getInputStream());){
 
 			String ins="POST ";
-			ins+=usuario+" "+contraseña+"\n";
+			ins+=usuario+" "+contrasegna+"\n";
 			System.out.println(ins);
 			out.write(ins.getBytes());// enviar el usuario y la contraseña al servidor para validar los datos
 			//System.out.println("ej1");

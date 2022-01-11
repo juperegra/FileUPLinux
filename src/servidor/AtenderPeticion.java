@@ -51,16 +51,16 @@ public class AtenderPeticion extends Thread{
 				System.out.println(trozos[1]);
 				Usuario u=gb.buscarUsuario(trozos[1]);
 				if(u!=null) {
-					if(u.getContraseña().equals(trozos[2])) {
+					if(u.getContrasegna().equals(trozos[2])) {
 						 resp="OK "+"\n";
 						 System.out.println("correcto");
 					}else{
 						System.out.println("this");
-						 resp="ERROR: Usuario y/o contraseña no validos"+"\n";
+						 resp="ERROR: Usuario y/o contrasegna no validos"+"\n";
 					}
 				}else {
 					System.out.println("or maybe this");
-					resp="ERROR: Usuario y/o contraseña no validos"+"\n";
+					resp="ERROR: Usuario y/o contrasegna no validos"+"\n";
 				}
 				System.out.println(resp);
 				out.write(resp.getBytes());
@@ -91,7 +91,7 @@ public class AtenderPeticion extends Thread{
 							resp="OK "+"\n";
 							out.write(resp.getBytes());
 						}else {
-							resp="ERROR: no se ha podido añadir el usuario"+"\n";
+							resp="ERROR: no se ha podido agnadir el usuario"+"\n";
 							out.write(resp.getBytes());
 						}
 					}else {
@@ -144,7 +144,7 @@ public class AtenderPeticion extends Thread{
 				if(trozos[1].equals("Usuario")) {
 					System.out.println(trozos[2]);
 					Usuario us= gb.buscarUsuario(trozos[2]);
-					resp=us.getId()+" "+us.getContraseña()+" "+us.getNombre()+" "+us.getApellidos()+"\n";
+					resp=us.getId()+" "+us.getContrasegna()+" "+us.getNombre()+" "+us.getApellidos()+"\n";
 					out.write(resp.getBytes());
 				}
 				if(trozos[1].equals("Fichero")) {
