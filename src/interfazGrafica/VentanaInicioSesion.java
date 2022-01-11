@@ -149,7 +149,7 @@ public class VentanaInicioSesion {
 			}
 			
 		}catch(IOException e){
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 	
@@ -187,7 +187,7 @@ public class VentanaInicioSesion {
 			}
 			
 		}catch(IOException e){
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		return new Usuario(id,nombre,apellidos,contrasegna);

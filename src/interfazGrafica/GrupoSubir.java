@@ -127,7 +127,7 @@ public class GrupoSubir extends Composite{
 					}
 					
 				}catch(IOException ex) {
-					//ex.printStackTrace();
+					ex.printStackTrace();
 				}
 				
 				}

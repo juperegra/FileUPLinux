@@ -94,7 +94,7 @@ public class GrupoPublicos extends Composite{
 			
 		}catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			
+			e.printStackTrace();
 		}
 		System.out.println("numFicheros:"+fichs.size());
 		

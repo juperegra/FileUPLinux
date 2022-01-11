@@ -159,7 +159,7 @@ public class VentanaPrincipal {
 		    }
 		    
 		}catch(IOException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 }
